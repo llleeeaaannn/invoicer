@@ -29,6 +29,26 @@ export default function InvoiceForm({ invoice, onChange }) {
         </button>
       </div>
 
+      {/* Seller toggle */}
+      <div className="flex rounded-lg border border-gray-300 overflow-hidden w-fit">
+        <button
+          onClick={() => update('seller', 'botaco')}
+          className={`px-5 py-2 text-sm font-medium transition-colors ${
+            invoice.seller === 'botaco' ? 'bg-gray-900 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'
+          }`}
+        >
+          Botaco Dublin
+        </button>
+        <button
+          onClick={() => update('seller', 'pauline')}
+          className={`px-5 py-2 text-sm font-medium transition-colors ${
+            invoice.seller === 'pauline' ? 'bg-gray-900 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'
+          }`}
+        >
+          Pauline Pierce
+        </button>
+      </div>
+
       {/* Document number and dates */}
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -125,16 +145,19 @@ export default function InvoiceForm({ invoice, onChange }) {
         />
       </div>
 
-      {/* Include payment details */}
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={invoice.includePaymentDetails}
-          onChange={(e) => update('includePaymentDetails', e.target.checked)}
-          className="w-4 h-4 accent-gray-700"
+      {/* Payment details */}
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
+          Payment details <span className="normal-case font-normal text-gray-400">(optional)</span>
+        </label>
+        <textarea
+          value={invoice.paymentDetails}
+          onChange={(e) => update('paymentDetails', e.target.value)}
+          placeholder="IBAN, bank details, etc."
+          rows={3}
+          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 resize-none"
         />
-        <span className="text-sm text-gray-700">Include payment details</span>
-      </label>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { COMPANIES } from '../data/companies.js'
 
 function formatDate(dateStr) {
   if (!dateStr) return ''
@@ -8,7 +9,8 @@ function formatDate(dateStr) {
   return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`
 }
 
-const InvoicePreview = forwardRef(function InvoicePreview({ invoice, settings }, ref) {
+const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
+  const company = COMPANIES[invoice.seller] || COMPANIES.botaco
   const isInvoice = invoice.docType === 'invoice'
   const total = invoice.lineItems.reduce((sum, item) => sum + (item.total || 0), 0)
   const numStr = String(invoice.number).padStart(3, '0')
@@ -29,19 +31,16 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice, settings },
       {/* Header */}
       <div className="px-12 pt-10 pb-8 flex justify-between items-start">
         <div>
-          {settings.businessName
-            ? <div className="text-2xl font-bold tracking-tight text-gray-900">{settings.businessName}</div>
-            : <div className="text-2xl font-bold tracking-tight text-gray-300">Your Business</div>
-          }
-          {settings.address && (
+          <div className="text-2xl font-bold tracking-tight text-gray-900">{company.name}</div>
+          {company.address && (
             <div className="text-xs text-gray-500 whitespace-pre-line mt-1 leading-relaxed">
-              {settings.address}
+              {company.address}
             </div>
           )}
         </div>
         <div className="text-right text-xs text-gray-500 space-y-0.5 mt-0.5">
-          {settings.phone && <div>{settings.phone}</div>}
-          {settings.email && <div>{settings.email}</div>}
+          {company.phone && <div>{company.phone}</div>}
+          {company.email && <div>{company.email}</div>}
         </div>
       </div>
 
@@ -167,7 +166,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice, settings },
       </div>
 
       {/* Payment details + Notes */}
-      {((invoice.includePaymentDetails && settings.paymentDetails) || invoice.notes) && (
+      {(invoice.notes || invoice.paymentDetails) && (
         <div className="px-12 pb-10 space-y-4">
           {invoice.notes && (
             <div className="border border-gray-200 rounded-lg overflow-hidden">
@@ -179,13 +178,13 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice, settings },
               </div>
             </div>
           )}
-          {invoice.includePaymentDetails && settings.paymentDetails && (
+          {invoice.paymentDetails && (
             <div className="border border-gray-200 rounded-lg overflow-hidden">
               <div className="bg-gray-50 px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-widest border-b border-gray-200">
                 Payment details
               </div>
               <div className="px-4 py-3 text-xs text-gray-600 whitespace-pre-line leading-relaxed">
-                {settings.paymentDetails}
+                {invoice.paymentDetails}
               </div>
             </div>
           )}
