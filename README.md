@@ -30,6 +30,24 @@ Then open [http://localhost:5173](http://localhost:5173).
 4. Click **Download PDF** to save the file
 5. Click **New Invoice** to start a fresh invoice — the number auto-increments
 
+## Deploying to GitHub Pages
+
+**First-time setup:**
+
+1. Run `npm run deploy` — this builds the app and pushes it to a `gh-pages` branch
+2. Go to your GitHub repo → **Settings** → **Pages**
+3. Under **Branch**, select `gh-pages` and click **Save**
+
+The app will be live at `https://YOUR_USERNAME.github.io/invoicer/` within a minute.
+
+**Publishing updates:**
+
+```bash
+npm run deploy
+```
+
+That's it — no need to touch GitHub settings again.
+
 ## Tech Stack
 
 - [React](https://react.dev) + [Vite](https://vitejs.dev)
