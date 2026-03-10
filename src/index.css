@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-100 text-gray-900;
+  }
+}
+
+@layer utilities {
+  .a4-preview {
+    width: 794px;
+    min-height: 1123px;
+  }
+}
