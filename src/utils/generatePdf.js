@@ -11,7 +11,7 @@ function slugify(str) {
 
 export async function generatePdf(previewElement, invoiceNumber, clientName, docType = 'invoice') {
   const canvas = await html2canvas(previewElement, {
-    scale: 2,
+    scale: 3,
     useCORS: true,
     backgroundColor: '#ffffff',
   })
@@ -24,13 +24,11 @@ export async function generatePdf(previewElement, invoiceNumber, clientName, doc
 
   const pdfWidth = pdf.internal.pageSize.getWidth()   // 210mm
   const pdfHeight = pdf.internal.pageSize.getHeight() // 297mm
-  const margin = 10 // mm — padding at top and bottom of each page
-
   // How many canvas pixels correspond to 1mm
   const pxPerMm = canvas.width / pdfWidth
 
-  // Usable content height per page in mm and px
-  const contentHeightMm = pdfHeight - margin * 2
+  // Content fills the full page height
+  const contentHeightMm = pdfHeight
   const contentHeightPx = contentHeightMm * pxPerMm
 
   const totalPages = Math.ceil(canvas.height / contentHeightPx)
@@ -48,11 +46,11 @@ export async function generatePdf(previewElement, invoiceNumber, clientName, doc
     ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height)
     ctx.drawImage(canvas, 0, srcY, canvas.width, srcHeight, 0, 0, canvas.width, srcHeight)
 
-    const sliceData = sliceCanvas.toDataURL('image/png')
+    const sliceData = sliceCanvas.toDataURL('image/jpeg', 0.92)
     const sliceHeightMm = (srcHeight / pxPerMm)
 
     if (page > 0) pdf.addPage()
-    pdf.addImage(sliceData, 'PNG', 0, margin, pdfWidth, sliceHeightMm)
+    pdf.addImage(sliceData, 'JPEG', 0, 0, pdfWidth, sliceHeightMm)
   }
 
   const numStr = String(invoiceNumber).padStart(3, '0')

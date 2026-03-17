@@ -62,27 +62,27 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
         {hasDetails && (
           <div className="border border-gray-200 rounded-lg overflow-hidden text-sm">
             {invoice.date && (
-              <div className="flex items-center">
-                <div className="bg-gray-50 px-4 py-2.5 text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
+              <div style={{ display: 'table', width: '100%' }}>
+                <div style={{ display: 'table-cell', verticalAlign: 'middle' }} className="bg-gray-50 px-4 py-2.5 leading-none text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
                   Date
                 </div>
-                <div className="px-4 py-2.5 text-gray-800">{formatDate(invoice.date)}</div>
+                <div style={{ display: 'table-cell', verticalAlign: 'middle' }} className="px-4 py-2.5 leading-none text-gray-800">{formatDate(invoice.date)}</div>
               </div>
             )}
             {isInvoice && invoice.dueDate && (
-              <div className="flex items-center border-t border-gray-100">
-                <div className="bg-gray-50 px-4 py-2.5 text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
+              <div style={{ display: 'table', width: '100%' }} className="border-t border-gray-100">
+                <div style={{ display: 'table-cell', verticalAlign: 'middle' }} className="bg-gray-50 px-4 py-2.5 leading-none text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
                   Due date
                 </div>
-                <div className="px-4 py-2.5 text-gray-800">{formatDate(invoice.dueDate)}</div>
+                <div style={{ display: 'table-cell', verticalAlign: 'middle' }} className="px-4 py-2.5 leading-none text-gray-800">{formatDate(invoice.dueDate)}</div>
               </div>
             )}
             {invoice.poNumber && (
-              <div className="flex items-center border-t border-gray-100">
-                <div className="bg-gray-50 px-4 py-2.5 text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
+              <div style={{ display: 'table', width: '100%' }} className="border-t border-gray-100">
+                <div style={{ display: 'table-cell', verticalAlign: 'middle' }} className="bg-gray-50 px-4 py-2.5 leading-none text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
                   PO number
                 </div>
-                <div className="px-4 py-2.5 text-gray-800">{invoice.poNumber}</div>
+                <div style={{ display: 'table-cell', verticalAlign: 'middle' }} className="px-4 py-2.5 leading-none text-gray-800">{invoice.poNumber}</div>
               </div>
             )}
           </div>
@@ -93,7 +93,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
       {hasBillTo && (
         <div className="px-12 pb-8">
           <div className="border border-gray-200 rounded-lg overflow-hidden">
-            <div className="bg-gray-50 px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-widest border-b border-gray-200">
+            <div className="bg-gray-50 px-4 py-2.5 leading-none text-xs font-semibold text-gray-400 uppercase tracking-widest border-b border-gray-200">
               Bill to
             </div>
             <div className="px-4 py-3">
@@ -115,16 +115,16 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
         <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="text-left px-4 py-3 font-semibold text-xs text-gray-400 uppercase tracking-wide">
+              <th style={{ verticalAlign: 'middle' }} className="text-left px-4 py-3 leading-none font-semibold text-xs text-gray-400 uppercase tracking-wide">
                 Description
               </th>
-              <th className="text-right px-4 py-3 font-semibold text-xs text-gray-400 uppercase tracking-wide w-16">
+              <th style={{ verticalAlign: 'middle' }} className="text-right px-4 py-3 leading-none font-semibold text-xs text-gray-400 uppercase tracking-wide w-16">
                 Qty
               </th>
-              <th className="text-right px-4 py-3 font-semibold text-xs text-gray-400 uppercase tracking-wide w-28">
+              <th style={{ verticalAlign: 'middle' }} className="text-right px-4 py-3 leading-none font-semibold text-xs text-gray-400 uppercase tracking-wide w-28">
                 Unit price
               </th>
-              <th className="text-right px-4 py-3 font-semibold text-xs text-gray-400 uppercase tracking-wide w-28">
+              <th style={{ verticalAlign: 'middle' }} className="text-right px-4 py-3 leading-none font-semibold text-xs text-gray-400 uppercase tracking-wide w-28">
                 Total
               </th>
             </tr>
@@ -133,17 +133,17 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
             {invoice.lineItems.map((item, index) =>
               item.description || item.quantity || item.unitPrice ? (
                 <tr key={index} className="border-t border-gray-100">
-                  <td className="px-4 py-3 text-gray-800">
+                  <td style={{ verticalAlign: 'middle' }} className="px-4 py-3 leading-none text-gray-800">
                     <div>{item.description}</div>
                     {item.notes && (
                       <div className="text-xs text-gray-400 mt-0.5">{item.notes}</div>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-500">{item.quantity}</td>
-                  <td className="px-4 py-3 text-right text-gray-500">
+                  <td style={{ verticalAlign: 'middle' }} className="px-4 py-3 leading-none text-right text-gray-500">{item.quantity}</td>
+                  <td style={{ verticalAlign: 'middle' }} className="px-4 py-3 leading-none text-right text-gray-500">
                     {item.unitPrice !== '' ? `€${parseFloat(item.unitPrice || 0).toFixed(2)}` : ''}
                   </td>
-                  <td className="px-4 py-3 text-right font-semibold text-gray-900">
+                  <td style={{ verticalAlign: 'middle' }} className="px-4 py-3 leading-none text-right font-semibold text-gray-900">
                     €{(item.total || 0).toFixed(2)}
                   </td>
                 </tr>
@@ -170,7 +170,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
         <div className="px-12 pb-10 space-y-4">
           {invoice.notes && (
             <div className="border border-gray-200 rounded-lg overflow-hidden">
-              <div className="bg-gray-50 px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-widest border-b border-gray-200">
+              <div className="bg-gray-50 px-4 py-2.5 leading-none text-xs font-semibold text-gray-400 uppercase tracking-widest border-b border-gray-200">
                 Notes
               </div>
               <div className="px-4 py-3 text-xs text-gray-600 whitespace-pre-line leading-relaxed">
@@ -180,7 +180,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
           )}
           {invoice.paymentDetails && (
             <div className="border border-gray-200 rounded-lg overflow-hidden">
-              <div className="bg-gray-50 px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-widest border-b border-gray-200">
+              <div className="bg-gray-50 px-4 py-2.5 leading-none text-xs font-semibold text-gray-400 uppercase tracking-widest border-b border-gray-200">
                 Payment details
               </div>
               <div className="px-4 py-3 text-xs text-gray-600 whitespace-pre-line leading-relaxed">
