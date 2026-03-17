@@ -85,7 +85,7 @@ export default function App() {
     setShowPrevious(false)
   }
 
-  const sellerLabel = { botaco: 'Botaco', pauline: 'Pauline' }
+  const sellerLabel = { botaco: 'Buteyko', pauline: 'Pauline' }
 
   return (
     <div className="min-h-screen bg-gray-100">

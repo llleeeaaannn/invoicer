@@ -10,10 +10,32 @@ function slugify(str) {
 }
 
 export async function generatePdf(previewElement, invoiceNumber, clientName, docType = 'invoice') {
+  // Wait for fonts to be fully loaded before capturing
+  await document.fonts.ready
+
   const canvas = await html2canvas(previewElement, {
     scale: 3,
     useCORS: true,
     backgroundColor: '#ffffff',
+    onclone: (doc, clonedEl) => {
+      // html2canvas has a known bug where it renders text too low due to
+      // incorrect font baseline calculations. Fix by adjusting padding
+      // on text-containing elements to shift text upward within their
+      // boxes (preserving backgrounds and borders).
+      const shift = 3
+      clonedEl.querySelectorAll('*').forEach((el) => {
+        const hasDirectText = Array.from(el.childNodes).some(
+          (n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim()
+        )
+        if (hasDirectText) {
+          const computed = doc.defaultView.getComputedStyle(el)
+          const pt = parseFloat(computed.paddingTop) || 0
+          const pb = parseFloat(computed.paddingBottom) || 0
+          el.style.paddingTop = Math.max(0, pt - shift) + 'px'
+          el.style.paddingBottom = (pb + shift) + 'px'
+        }
+      })
+    },
   })
 
   const pdf = new jsPDF({

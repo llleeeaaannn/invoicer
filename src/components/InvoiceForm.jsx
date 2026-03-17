@@ -37,7 +37,7 @@ export default function InvoiceForm({ invoice, onChange }) {
             invoice.seller === 'botaco' ? 'bg-gray-900 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'
           }`}
         >
-          Botaco Dublin
+          Buteyko Dublin
         </button>
         <button
           onClick={() => update('seller', 'pauline')}
