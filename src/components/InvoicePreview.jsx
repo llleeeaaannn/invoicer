@@ -62,7 +62,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
         {hasDetails && (
           <div className="border border-gray-200 rounded-lg overflow-hidden text-sm">
             {invoice.date && (
-              <div className="flex items-center">
+              <div className="flex">
                 <div className="bg-gray-50 px-4 py-2.5 text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
                   Date
                 </div>
@@ -70,7 +70,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
               </div>
             )}
             {isInvoice && invoice.dueDate && (
-              <div className="flex items-center border-t border-gray-100">
+              <div className="flex border-t border-gray-100">
                 <div className="bg-gray-50 px-4 py-2.5 text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
                   Due date
                 </div>
@@ -78,7 +78,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
               </div>
             )}
             {invoice.poNumber && (
-              <div className="flex items-center border-t border-gray-100">
+              <div className="flex border-t border-gray-100">
                 <div className="bg-gray-50 px-4 py-2.5 text-xs font-medium text-gray-400 uppercase tracking-wide w-28">
                   PO number
                 </div>
@@ -156,7 +156,7 @@ const InvoicePreview = forwardRef(function InvoicePreview({ invoice }, ref) {
       {/* Total */}
       <div className="px-12 pb-8 flex justify-end">
         <div className="border border-gray-200 rounded-lg overflow-hidden min-w-56">
-          <div className="flex items-center justify-between bg-gray-900 px-5 py-3">
+          <div className="flex justify-between bg-gray-900 px-5 py-3">
             <span className="text-xs font-semibold text-gray-300 uppercase tracking-widest">
               Total
             </span>
